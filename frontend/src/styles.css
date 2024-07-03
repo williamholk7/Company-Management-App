@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Inter var','ui-sans-serif','system-ui','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+  background-color: #1e293b;
+  color: white;
+  margin: 0px;
+}
+
+input, select, textarea {
+  background: transparent;
+  border: 1px solid #374151;
+  font-size: 20px;
+  padding:  5px;
+  color: white;
+  border-radius: 5px;
+  width: 220px;
+}
+::-webkit-input-placeholder {
+  color: #374151;
+}
+
+button {
+  background: transparent;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #0891b2;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #06b6d4;
+}
+
+button:disabled {
+  cursor: unset;
+  background-color: #374151;
+}

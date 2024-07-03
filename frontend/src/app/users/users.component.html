@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<div class='container'>
+  <div class="header">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 50px; height: 50px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+    </svg>
+    <h1 class='title'>Users</h1>
+    <div class='button-container' *ngIf='user?.admin'>
+      <button class='btn' (click)="toggleShowAddModal()">Add User</button>
+    </div>
+    <div *ngIf="!user?.admin" style="width: 65px"></div>
+  </div>
+  <hr style="width: 100%;"/>
+  <table class='users-table' *ngIf='users.length > 0'>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Active</th>
+      <th>Admin</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    <tr *ngFor='let userData of users'>
+      <td>{{userData.profile.firstName}} {{userData.profile.lastName}}</td>
+      <td>{{userData.profile.email}}</td>
+      <td [ngClass]='userData.active ? "green" : "red"'>{{userData.active ? 'YES' : 'NO'}}</td>
+      <td [ngClass]='userData.admin ? "green" : "red"'>{{userData.admin ? 'YES' : 'NO'}}</td>
+      <td>{{userData.status}}</td>
+      <td><button class='btn-red' (click)='deleteUser(userData.id)' [disabled]="userData.id == user!.id">Delete</button></td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf='showAddModal' class='modal-container'>
+  <div class="modal-background" (click)='closeAddModal()'>
+  </div>
+  <div class="modal flex-col">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class='close-button' (click)='closeAddModal()'>
+    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
+  </svg>  
+  <form [formGroup]='addUserForm' class='flex-col' (ngSubmit)='addUser()'>
+    <div class="field">
+      <label for="username">Username</label>
+      <input id="username" placeholder="Username" type="text" formControlName="username" autocomplete="off"/>
+    </div>
+    <div class="field">
+      <label for="firstName">First Name</label>
+      <input id="firstName" class="half" placeholder="First Name" type="text" formControlName="firstName" autocomplete="off"/>
+    </div>
+    <div class="field">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" class="half" placeholder="Last Name" type="text" formControlName="lastName" autocomplete="off"/>
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" placeholder="Email" type="email" formControlName="email" autocomplete="off"/>
+    </div>
+    <div class="field">
+      <label for="phone">Phone</label>
+      <input id="phone" placeholder="Phone" type="text" formControlName="phone" autocomplete="off"/>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" class="half" placeholder="Password" type="password" formControlName="password" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" class="half" placeholder="Confirm Password" type="password" formControlName="confirmPassword" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label for="admin">
+        Make Admin?
+        <input id="admin" type="checkbox" formControlName="admin" />
+      </label>
+    </div>
+    <button type='submit'>Submit</button>
+  </form>
+</div>
+</div>

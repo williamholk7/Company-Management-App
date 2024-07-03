@@ -1,0 +1,84 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="header">
+    <a class="back-button" (click)="goToTeams()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      Back
+    </a>
+    <h1 class='title'>Projects For {{team?.name}}</h1>
+    <div class='button-container' *ngIf='user?.admin'>
+      <button class='btn' (click)="openOverlay('newProject')">New Project</button>
+    </div>
+    <div *ngIf="!user?.admin" style="width: 65px"></div>
+  </div>
+  <hr style="width: 100%;" />
+
+  <div class="projects-container">
+    <app-project-card *ngFor="let project of projectsList" [project]="project" (editProject)="openOverlay('editProject', $event)"></app-project-card>
+  </div>
+
+  <!-- New Project Modal -->
+  <div class="modal-container" *ngIf="newProjectOverlayOpen">
+    <div class="modal-background" (click)="closeOverlay('newProject')"></div>
+    <div class="modal flex-col">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close-button"
+        (click)="closeOverlay('newProject')">
+        <path fill-rule="evenodd"
+          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+          clip-rule="evenodd" />
+      </svg>
+      <form (ngSubmit)="saveNewProject()">
+        <div class="field">
+          <label for="projectName">Project Name</label>
+          <input id="projectName" type="text" [(ngModel)]="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="projectDescription">Project Description</label>
+          <textarea id="projectDescription" type="text" [(ngModel)]="description" name="description" required rows="4"
+            cols="30" style="max-width: 400px; max-height: 450px"></textarea>
+        </div>
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- edit Project Modal -->
+<div class="modal-container" *ngIf="editProjectOverlayOpen">
+  <div class="modal-background" (click)="closeOverlay('editProject')"></div>
+  <div class="modal flex-col">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close-button"
+      (click)="closeOverlay('editProject')">
+      <path fill-rule="evenodd"
+        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+        clip-rule="evenodd" />
+    </svg>
+    <form>
+      <div class="field">
+        <label for="editProjectName">Project Name</label>
+        <input id="editProjectName" *ngIf="selectedProject" type="text" [(ngModel)]="selectedProject.name" name="name"
+          required>
+      </div>
+      <div class="field">
+        <label for="editProjectDescription">Project Description</label>
+        <textarea *ngIf="selectedProject" id="editProjectDescription" type="text" [(ngModel)]="selectedProject.description"
+          name="description" required  rows="4" cols="30" style="max-width: 400px; max-height: 450px"></textarea>
+      </div>
+      <div class="dropdown-container" *ngIf='user!.admin'>
+        <label for="editIsActive" class="active-title">Active?</label>
+        <select id="editIsActive" [(ngModel)]="isActive" name="isActive">
+          <option disabled>Pick An Option</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+      <button (click)="updateProject()">Save</button>
+    </form>
+  </div>
+</div>

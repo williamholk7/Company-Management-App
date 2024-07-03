@@ -1,0 +1,36 @@
+<nav class="navbar-container">
+  <!-- Spacer -->
+  <div></div>
+  <div class="image-cointainer">
+    <img src="./assets/logo.svg" alt="Logo" style="height: 40px;"/>
+  </div>
+  <div class="user-container">
+    {{user?.profile?.firstName}} {{user?.profile?.lastName}} {{userIsAdmin ? "(Admin)" : ""}}
+  </div>
+  <div class="links-container">
+      <a class="hide-on-mobile" routerLink="/announcements">Announcements</a>
+  <a *ngIf="userIsAdmin" class="hide-on-mobile" routerLink="/company">Company</a>
+  <a class="hide-on-mobile" routerLink="/teams">Teams</a>
+  <a *ngIf="userIsAdmin" class="hide-on-mobile" routerLink="/users">Users</a>
+  <a class="hide-on-mobile" (click)="logout()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: red; width: 40px; height: 40px;">
+      <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+    </svg>
+  </a>
+  <a class="hide-on-desktop hamburger" (click)="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hamburger">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </a>
+  </div>
+
+</nav>
+<div *ngIf="showMenu" class="mobile-menu-container hide-on-desktop">
+  <div></div>
+  <a routerLink="/announcements">ANNOUNCEMENTS</a>
+  <a *ngIf="userIsAdmin" routerLink="/company">COMPANY</a>
+  <a routerLink="/teams">TEAM</a>
+  <a *ngIf="userIsAdmin" routerLink="/users">USERS</a>
+  <a (click)="logout()">LOGOUT</a>
+  <div></div>
+</div>

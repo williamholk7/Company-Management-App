@@ -1,0 +1,17 @@
+<div class="project">
+    <div class="name-container">
+      <h3 class="project-title">{{ cardProject.name }}</h3>
+      <div class="tag active" *ngIf="cardProject.active; else inactiveText">
+        ACTIVE
+      </div>
+      <ng-template #inactiveText>
+        <div  class="tag inactive">INACTIVE</div>
+      </ng-template>
+      <div class="button-container">
+        <button (click)="onEditClick(cardProject)">Edit</button>
+      </div>
+    </div>
+    <div class="description-container">
+      <p>{{ cardProject.description }}</p>
+    </div>
+</div>

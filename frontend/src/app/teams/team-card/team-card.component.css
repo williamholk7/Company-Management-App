@@ -1,0 +1,76 @@
+p{
+  color: white;
+}
+
+.title{
+  font-size: 1.5rem;
+}
+
+.team-card-container{
+  width: 100%;
+  background: #0f172a;
+  box-shadow: black 0px 5px 10px 0px;
+  border: 1px solid #374151;
+  border-radius: 5px;
+  margin-top: 5rem;
+}
+
+.title-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid #C3A584 .2rem;
+}
+
+.team-name-container{
+  display: flex;
+  align-items: center;
+}
+.title-stat{
+  margin: 1rem;
+}
+
+.title:hover{
+  cursor: pointer;
+  color: gold;
+}
+
+button{
+  border: none;
+  background-color: #dc2626;
+  color: white;
+  padding: .75rem;
+}
+
+button:hover{
+  background-color: #f87171;
+  cursor: pointer;
+}
+
+.members-container{
+  width: 100%;
+}
+
+.members-title{
+  font-size: 1.25rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.members-names-container{
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.member-name{
+  color: white;
+  background-color: rgb(27, 160, 152);
+  padding: .5rem;
+  margin: 1rem;
+  text-align: center;
+  border-radius: .5rem;
+}

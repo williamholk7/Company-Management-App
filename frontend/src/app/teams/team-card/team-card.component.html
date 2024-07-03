@@ -1,0 +1,20 @@
+<div class="team-card-container">
+  <div class="title-container">
+    <div class="team-name-container">
+      <p class="title-stat title" (click)="viewTeamProjects()">{{ team.name }}</p>
+      <button *ngIf="isAdmin"  (click)="editTeam()">Edit</button>
+    </div>
+    <p class="title-stat"># of Projects: {{projectsCount}}</p>
+  </div>
+  <div class="members-container">
+    <div class="members-title">
+      <p class="members-title">Members</p>
+    </div>
+    <div class="members-names-container">
+    <div *ngFor="let teammate of team.teammates">
+      <p class="member-name">{{teammate.profile.firstName}} {{teammate.profile.lastName}}</p>
+    </div>
+    </div>
+  </div>
+</div>
+
